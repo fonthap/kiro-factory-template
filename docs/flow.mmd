@@ -1,0 +1,29 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '15px', 'lineColor': '#555'}, 'flowchart': {'rankSpacing': 40, 'nodeSpacing': 25, 'curve': 'basis'}}}%%
+flowchart TD
+    U([" 👤  You "]):::green
+    U -->|"feature / bug / task"| PO
+
+    PO["🎯 Product Owner\n― analyze ― plan ― review ―"]:::blue
+    PO -->|delegate| FE & BE & OPS & QA & SEC
+
+    FE["🎨 Frontend"]:::purple
+    BE["⚙️ Backend"]:::sky
+    OPS["🔧 DevOps"]:::teal
+    QA["🧪 QA"]:::yellow
+    SEC["🔒 Security"]:::red
+
+    FE & BE & OPS & QA & SEC -->|output| R
+    R["✅ Review & Integrate"]:::blue
+    R -->|"unified result"| U
+
+    W[("📚 Wiki\nproject.md · docs · ADRs\nrunbooks · architecture")]:::orange
+    PO <-.->|"read context\nwrite docs"| W
+
+    classDef green fill:#66BB6A,stroke:#43A047,color:#fff
+    classDef blue fill:#4A90D9,stroke:#2E6BA6,color:#fff
+    classDef purple fill:#CE93D8,stroke:#8E24AA,color:#fff
+    classDef sky fill:#90CAF9,stroke:#1565C0,color:#fff
+    classDef teal fill:#80CBC4,stroke:#00897B,color:#fff
+    classDef yellow fill:#FFE082,stroke:#F9A825,color:#333
+    classDef red fill:#EF9A9A,stroke:#C62828,color:#fff
+    classDef orange fill:#FFE0B2,stroke:#EF6C00,color:#333

@@ -1,0 +1,25 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '14px'}, 'flowchart': {'rankSpacing': 30}}}%%
+flowchart TD
+    subgraph K["  ~/.kiro/ — Agent System  "]
+        K1["agents/\n6 JSON configs"]
+        K2["prompts/\nPO system prompt"]
+        K3["hooks/\nlogging · cost · traces"]
+        K4["evals/\nquality scoring"]
+        K5["steering/\ncoding rules"]
+        K6["settings/\nCLI · MCP"]
+        K7["skills/\nKarpathy guidelines"]
+    end
+
+    subgraph W["  ~/wiki/ — Project Wiki  "]
+        W1["project.md\ntech stack · conventions"]
+        W2["docs/\nADRs · API docs"]
+        W3["architecture/\ndiagrams · services"]
+        W4["runbooks/\nops procedures"]
+        W5["sprints/\nsprint tracking"]
+        W6["templates/\n8 page templates"]
+    end
+
+    K1 -->|"agents read & write"| W1
+
+    style K fill:#E3F2FD,stroke:#1976D2
+    style W fill:#FFF3E0,stroke:#EF6C00

@@ -1,49 +1,54 @@
 # Kiro Factory Template
 
-Multi-agent AI software team built on [Kiro CLI](https://github.com/amazon/kiro-cli). A **Product Owner** orchestrator delegates to **Frontend**, **Backend**, **DevOps**, **QA**, and **Security** agents — backed by a project wiki.
+A multi-agent AI software team for [Kiro CLI](https://github.com/amazon/kiro-cli). A **Product Owner** orchestrator delegates to **Frontend**, **Backend**, **DevOps**, **QA**, and **Security** agents — all sharing a project wiki as memory.
 
-## What You Get
+> Looking for a provider-agnostic version? See [ai-factory-template](https://github.com/fonthap/ai-factory-template) — same concept, works with any AI tool.
 
-```
-.kiro/                          # Agent system (→ ~/.kiro/)
-├── agents/                     # PO orchestrator + 5 engineer agents
-│   ├── kiro-factory.json       # Product Owner (task breakdown, delegation, review)
-│   ├── factory-frontend.json   # Senior Frontend Engineer
-│   ├── factory-backend.json    # Senior Backend Engineer
-│   ├── factory-devops.json     # Senior DevOps/SRE Engineer
-│   ├── factory-qa.json         # Senior QA Engineer
-│   └── factory-security.json   # Senior Security Engineer
-├── prompts/                    # PO system prompt
-├── evals/                      # Code review scoring per agent
-├── hooks/                      # Logging, cost tracking, trace viewer
-├── steering/                   # Global coding standards
-├── settings/                   # CLI + MCP config
-└── docs/                       # Agent onboarding runbook
+## Concept
 
-wiki/                           # Project wiki (→ ~/wiki/)
-├── KIRO.md                     # Schema — how agents use the wiki
-├── templates/                  # Page templates (ADR, sprint, runbook, incident, etc.)
-└── wiki/                       # Agent-maintained pages
-    ├── project.md              # Tech stack, conventions, environments
-    ├── index.md                # Master page index
-    ├── log.md                  # Activity timeline
-    ├── docs/                   # ADRs, API docs, guides
-    ├── architecture/           # System diagrams, service maps
-    ├── runbooks/               # Operational procedures
-    ├── sprints/                # Sprint tracking
-    └── projects/               # Sub-projects, features
-```
+**The problem:** AI coding assistants are stateless. They forget context between sessions, don't follow your team's conventions, and can't coordinate multi-role work.
+
+**The solution:** A team of specialized AI agents that share a persistent wiki. Each agent has deep expertise in one domain. A Product Owner orchestrates them — breaking tasks into sub-tasks, delegating in parallel, reviewing quality, and keeping the wiki updated.
+
+### How It Works
+
+![Flow](docs/flow.png)
+
+1. **You** describe a feature, bug, or task
+2. **Product Owner** reads the wiki for context (tech stack, conventions, past decisions)
+3. **PO plans** which agents to dispatch — in parallel when possible
+4. **Agents** write code, tests, infra, docs — each in their specialty
+5. **PO reviews** quality, integrates the pieces, resolves conflicts
+6. **Wiki updates** — knowledge compounds over time
+
+### File Structure
+
+![Structure](docs/structure.png)
 
 ## Agent Team
 
-| Agent | Role | Handles |
-|-------|------|---------|
-| `kiro-factory` | Product Owner | Task breakdown, delegation, code review, integration |
-| `factory-frontend` | Senior Frontend | React/Next.js, TypeScript, UI/UX, accessibility, component tests |
+| Agent | Role | Expertise |
+|-------|------|-----------|
+| `kiro-factory` | **Product Owner** | Task breakdown, parallel delegation (DAG), code review, integration |
+| `factory-frontend` | Senior Frontend | React/Next.js, TypeScript, accessibility, component tests |
 | `factory-backend` | Senior Backend | APIs, databases, auth, business logic, integration tests |
 | `factory-devops` | Senior DevOps/SRE | CI/CD, Terraform, Kubernetes, monitoring, runbooks |
 | `factory-qa` | Senior QA | Test strategy, E2E automation, performance testing, quality gates |
 | `factory-security` | Senior Security | Threat modeling, OWASP, secure code review, dependency scanning |
+
+## Key Features
+
+| Feature | Description |
+|---------|-------------|
+| **Parallel DAG** | Independent agents run simultaneously |
+| **Plan-and-Execute** | Complex tasks get: plan → execute → review → revise |
+| **Code Review** | PO scores each agent's output (5 criteria per role) |
+| **Reflection** | Agents self-check before responding |
+| **Output Validation** | Mandatory sections enforced per domain |
+| **Wiki Memory** | Agents read past ADRs, runbooks, and patterns |
+| **Cost Tracking** | Model-aware pricing with multi-day reports |
+| **Trace Viewer** | OTel-style trace_id per request for debugging |
+| **Karpathy Skill** | LLM coding best practices loaded globally |
 
 ## Quick Start
 
@@ -60,73 +65,65 @@ bash setup.sh
 kiro-cli chat
 ```
 
-### Example prompts
+`setup.sh` asks for your project name and GitHub username, replaces all placeholders, and installs everything to `~/.kiro/` and `~/wiki/`.
+
+### Example Prompts
 
 ```
 "build a login page with email/password form"
 "add a REST API for user CRUD with PostgreSQL"
-"set up GitHub Actions CI pipeline with lint, test, build"
+"set up GitHub Actions CI with lint, test, build, deploy"
 "write E2E tests for the checkout flow"
+"review this code for security vulnerabilities"
 "create an ADR for choosing PostgreSQL over MongoDB"
 ```
 
-The PO will analyze your request, delegate to the right agents (in parallel when possible), review their output, and return the integrated result.
+## What's Inside
 
-## Setup Script
+```
+.kiro/
+├── agents/          6 agent configs (PO + 5 engineers)
+├── prompts/         PO system prompt (plan-and-execute)
+├── evals/           Quality scoring criteria per agent
+├── hooks/           Logging, cost tracking, trace viewer
+├── steering/        Global coding standards
+├── settings/        CLI config + MCP (Playwright for web browsing)
+├── skills/          Karpathy coding guidelines
+└── docs/            Agent onboarding runbook
 
-`setup.sh` will ask for:
-- Project name
-- Your GitHub username (for repo URLs in templates)
-
-Then it replaces all `{{PLACEHOLDERS}}`, copies `.kiro/` to `~/.kiro/` and `wiki/` to `~/wiki/`, and installs Playwright for web browsing.
-
-## Manual Setup
-
-```bash
-cp -r .kiro/ ~/.kiro/
-cp -r wiki/ ~/wiki/
-
-# Replace {{HOME}} in kiro-factory.json with your home path
-# Replace {{PROJECT_NAME}} in wiki files with your project name
-# Replace {{DATE}} with today's date
-
-npx playwright install chromium
+wiki/
+├── KIRO.md          Wiki schema (how agents operate)
+├── templates/       8 page templates (ADR, sprint, runbook, incident, etc.)
+└── wiki/
+    ├── project.md   Tech stack, conventions, environments
+    ├── index.md     Master page index (agents read first)
+    ├── log.md       Activity timeline
+    ├── docs/        ADRs, API docs, guides
+    ├── architecture/  System diagrams, service maps
+    ├── runbooks/    Operational procedures
+    ├── sprints/     Sprint tracking
+    └── projects/    Sub-projects, features
 ```
 
 ## Customization
 
-### Change default model
-Edit `.kiro/settings/cli.json` → `chat.defaultModel`. Each agent also has its own `model` field.
+**Change model** — Edit `.kiro/settings/cli.json` or each agent's `model` field.
 
-### Add/remove agents
-See [docs/agent-onboarding.md](.kiro/docs/agent-onboarding.md).
+**Add/remove agents** — See [docs/agent-onboarding.md](.kiro/docs/agent-onboarding.md).
 
-### Add MCP servers
-Edit `.kiro/settings/mcp.json` (Playwright pre-configured for web browsing).
+**Add MCP servers** — Edit `.kiro/settings/mcp.json` (Playwright pre-configured).
+
+**Adjust rules** — Edit `.kiro/steering/factory-rules.md`.
 
 ## Tools
 
 ```bash
-# Cost report
-~/.kiro/hooks/factory-cost.sh          # today
+~/.kiro/hooks/factory-cost.sh          # cost report (today)
 ~/.kiro/hooks/factory-cost.sh 7d       # last 7 days
-
-# Trace viewer
 ~/.kiro/hooks/factory-trace.sh         # last trace
-~/.kiro/hooks/factory-trace.sh all     # all today
-
-# Log viewer
-~/.kiro/hooks/factory-logs.sh summary
+~/.kiro/hooks/factory-trace.sh all     # all traces today
+~/.kiro/hooks/factory-logs.sh summary  # log summary
 ```
-
-## How It Works
-
-1. You describe a feature or task
-2. PO reads project wiki for context (tech stack, conventions, existing code)
-3. PO plans which agents to dispatch (parallel or pipeline)
-4. Agents write code, tests, infra, and docs
-5. PO reviews quality, integrates pieces, updates the wiki
-6. Knowledge compounds — agents reference past ADRs, runbooks, and patterns
 
 ## License
 
