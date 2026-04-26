@@ -56,16 +56,37 @@ A multi-agent AI software team for [Kiro CLI](https://github.com/amazon/kiro-cli
 # 1. Install Kiro CLI
 npm install -g @anthropic/kiro-cli
 
-# 2. Clone and setup
+# 2. Clone template
 git clone https://github.com/fonthap/kiro-factory-template.git
-cd kiro-factory-template
-bash setup.sh
 
-# 3. Start
-kiro-cli chat
+# 3. Setup into your project
+cd kiro-factory-template
+bash setup.sh    # asks project name, installs into your project dir
+
+# 4. Start (from your project directory)
+cd ~/projects/my-app
+kiro-cli chat --agent kiro-factory
 ```
 
-`setup.sh` asks for your project name and GitHub username, replaces all placeholders, and installs everything to `~/.kiro/` and `~/wiki/`.
+### Multiple Factories (No Conflicts)
+
+`setup.sh` installs **into your project directory** (not globally). You can have multiple factories — one per project:
+
+```
+~/projects/
+├── my-app/              ← cd here → work team factory
+│   ├── .kiro/agents/    (frontend, backend, devops, qa, security)
+│   ├── wiki/
+│   └── src/
+├── another-app/         ← cd here → different factory
+│   ├── .kiro/agents/
+│   └── wiki/
+
+~/.kiro/                 ← your global/personal setup (untouched)
+~/wiki/                  ← your personal wiki (untouched)
+```
+
+Kiro CLI discovers local `.kiro/agents/` automatically when you `cd` into a project.
 
 ### Example Prompts
 

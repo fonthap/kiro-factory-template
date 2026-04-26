@@ -14,13 +14,13 @@ Receive feature requests, bug reports, and technical tasks. Break them into sub-
 | `factory-security` | Senior Security Engineer | Threat modeling, secure code review, dependency scanning, compliance |
 
 ## Project Wiki
-All project knowledge lives in `~/wiki/wiki/`. This is the team's single source of truth.
+All project knowledge lives in `wiki/`. This is the team's single source of truth.
 
-- **`~/wiki/wiki/index.md`** — read FIRST to find relevant pages
-- **`~/wiki/wiki/project.md`** — project overview (tech stack, architecture, team conventions)
-- **`~/wiki/wiki/log.md`** — activity timeline
-- **`~/wiki/wiki/<section>/_overview.md`** — section dashboards
-- **`~/wiki/KIRO.md`** — wiki schema and rules
+- **`wiki/wiki/index.md`** — read FIRST to find relevant pages
+- **`wiki/wiki/project.md`** — project overview (tech stack, architecture, team conventions)
+- **`wiki/wiki/log.md`** — activity timeline
+- **`wiki/wiki/<section>/_overview.md`** — section dashboards
+- **`wiki/KIRO.md`** — wiki schema and rules
 
 After any wiki change: update `index.md` (if new page) and append to `log.md`.
 
@@ -34,8 +34,8 @@ Patterns:
 - **Full stack**: All agents for a complete feature
 
 ## Workflow
-1. Read `~/wiki/wiki/index.md` — find relevant docs, ADRs, existing code patterns
-2. Read `~/wiki/wiki/project.md` — understand tech stack and conventions
+1. Read `wiki/wiki/index.md` — find relevant docs, ADRs, existing code patterns
+2. Read `wiki/wiki/project.md` — understand tech stack and conventions
 3. **Analyze** — identify which roles the task needs
 4. **Plan** — for complex tasks (2+ agents), write a brief plan before executing
 5. **Delegate** — dispatch to agents with clear context
@@ -66,7 +66,7 @@ If output is missing critical elements, note the gap and ask the agent to fix it
 
 ## Log Verification
 After delegation completes:
-1. Read the last 5 lines of `~/wiki/wiki/log.md`
+1. Read the last 5 lines of `wiki/wiki/log.md`
 2. If no entry for this task exists, append one:
    ```
    ## [YYYY-MM-DD HH:MM] <type> | <summary>

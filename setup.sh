@@ -1,38 +1,56 @@
 #!/bin/bash
 # Kiro Factory Template — Setup Script
+# Installs as PROJECT-LOCAL (not global) — safe to use alongside other factories
 set -e
 
 echo "🏭 Kiro Factory Template Setup"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
-if [ -d "$HOME/.kiro/agents" ] && [ -f "$HOME/wiki/wiki/index.md" ]; then
-  echo "⚠️  WARNING: ~/.kiro/ and ~/wiki/ already exist."
-  echo "   Running setup will OVERWRITE your current agent configs and wiki."
-  echo "   If you have an existing Kiro Factory, this is probably not what you want."
-  echo ""
-  read -p "Continue anyway? (yes/no): " DANGER
-  [ "$DANGER" != "yes" ] && echo "Aborted. Your setup is safe." && exit 0
-  echo ""
-fi
+echo "This installs the factory INTO YOUR PROJECT DIRECTORY (not globally)."
+echo "Your global ~/.kiro/ setup will NOT be touched."
+echo ""
 
 read -p "Project name: " PROJECT_NAME
-read -p "GitHub username (for template URLs): " GITHUB_USER
+read -p "GitHub username: " GITHUB_USER
+read -p "Target directory (default: current dir): " TARGET_DIR
+TARGET_DIR="${TARGET_DIR:-.}"
 
 DATE=$(date +%Y-%m-%d)
 
 echo ""
 echo "📋 Project: $PROJECT_NAME"
-echo "   GitHub:  $GITHUB_USER"
+echo "   Target:  $(cd "$TARGET_DIR" && pwd)"
 echo ""
 read -p "Proceed? (y/n): " CONFIRM
 [ "$CONFIRM" != "y" ] && echo "Aborted." && exit 1
 
 echo ""
+echo "🔧 Copying template..."
+
+# Copy .kiro/ and wiki/ into target project
+mkdir -p "$TARGET_DIR/.kiro" "$TARGET_DIR/wiki"
+cp -r .kiro/agents "$TARGET_DIR/.kiro/"
+cp -r .kiro/prompts "$TARGET_DIR/.kiro/"
+cp -r .kiro/evals "$TARGET_DIR/.kiro/"
+cp -r .kiro/steering "$TARGET_DIR/.kiro/"
+cp -r .kiro/docs "$TARGET_DIR/.kiro/"
+cp -r .kiro/skills "$TARGET_DIR/.kiro/"
+cp -r wiki/* "$TARGET_DIR/wiki/"
+
+# Hooks and settings go global (they're shared infra)
+if [ ! -d "$HOME/.kiro/hooks" ]; then
+  mkdir -p "$HOME/.kiro/hooks" "$HOME/.kiro/settings"
+  cp -r .kiro/hooks/* "$HOME/.kiro/hooks/"
+  cp -r .kiro/settings/* "$HOME/.kiro/settings/"
+  chmod +x "$HOME/.kiro/hooks/"*.sh
+  echo "✅ Hooks & settings installed to ~/.kiro/ (first time only)"
+fi
+
 echo "🔧 Replacing placeholders..."
 
-find . -type f \( -name "*.md" -o -name "*.json" \) | while read -r file; do
+# Replace placeholders in target
+find "$TARGET_DIR/.kiro" "$TARGET_DIR/wiki" -type f \( -name "*.md" -o -name "*.json" \) | while read -r file; do
   if sed --version >/dev/null 2>&1; then
-    # GNU sed (Linux)
     sed -i \
       -e "s|{{PROJECT_NAME}}|$PROJECT_NAME|g" \
       -e "s|{{GITHUB_USER}}|$GITHUB_USER|g" \
@@ -40,7 +58,6 @@ find . -type f \( -name "*.md" -o -name "*.json" \) | while read -r file; do
       -e "s|{{HOME}}|$HOME|g" \
       "$file" 2>/dev/null || true
   else
-    # BSD sed (macOS)
     sed -i '' \
       -e "s|{{PROJECT_NAME}}|$PROJECT_NAME|g" \
       -e "s|{{GITHUB_USER}}|$GITHUB_USER|g" \
@@ -50,56 +67,16 @@ find . -type f \( -name "*.md" -o -name "*.json" \) | while read -r file; do
   fi
 done
 
-echo "✅ Placeholders replaced"
-
-if [ -d "$HOME/.kiro/agents" ]; then
-  echo ""
-  echo "⚠️  ~/.kiro/ already exists."
-  read -p "Overwrite agent configs? (y/n): " OVERWRITE
-  if [ "$OVERWRITE" = "y" ]; then
-    cp -r .kiro/agents/ "$HOME/.kiro/agents/"
-    cp -r .kiro/prompts/ "$HOME/.kiro/prompts/"
-    cp -r .kiro/evals/ "$HOME/.kiro/evals/"
-    cp -r .kiro/steering/ "$HOME/.kiro/steering/"
-    cp -r .kiro/settings/ "$HOME/.kiro/settings/"
-    mkdir -p "$HOME/.kiro/docs" && cp -r .kiro/docs/ "$HOME/.kiro/docs/"
-    for hook in .kiro/hooks/*.sh; do
-      cp "$hook" "$HOME/.kiro/hooks/$(basename "$hook")"
-      chmod +x "$HOME/.kiro/hooks/$(basename "$hook")"
-    done
-    echo "✅ ~/.kiro/ updated"
-  fi
-else
-  mkdir -p "$HOME/.kiro"
-  cp -r .kiro/* "$HOME/.kiro/"
-  chmod +x "$HOME/.kiro/hooks/"*.sh
-  echo "✅ Installed to ~/.kiro/"
-fi
-
-if [ -d "$HOME/wiki/wiki" ]; then
-  echo ""
-  echo "⚠️  ~/wiki/ already exists."
-  read -p "Overwrite wiki? (y/n): " OVERWRITE_WIKI
-  if [ "$OVERWRITE_WIKI" = "y" ]; then
-    cp -r wiki/* "$HOME/wiki/"
-    echo "✅ ~/wiki/ updated"
-  fi
-else
-  mkdir -p "$HOME/wiki"
-  cp -r wiki/* "$HOME/wiki/"
-  echo "✅ Installed to ~/wiki/"
-fi
-
-echo ""
-echo "🌐 Installing Playwright..."
-npx playwright install chromium 2>/dev/null && echo "✅ Playwright installed" || echo "⚠️  Run 'npx playwright install chromium' manually"
+echo "✅ Done"
 
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "🎉 Done!"
+echo "🎉 Factory installed to: $(cd "$TARGET_DIR" && pwd)"
 echo ""
-echo "Next steps:"
-echo "  1. Edit ~/wiki/wiki/project.md — add your tech stack and conventions"
-echo "  2. Run: kiro-cli chat"
-echo "  3. Try: \"build a login page with email/password\""
+echo "Usage:"
+echo "  cd $(cd "$TARGET_DIR" && pwd)"
+echo "  kiro-cli chat --agent kiro-factory"
+echo ""
+echo "Your global ~/.kiro/ is untouched."
+echo "Local .kiro/agents/ takes priority when you cd into this project."
 echo ""

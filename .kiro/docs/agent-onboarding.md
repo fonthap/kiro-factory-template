@@ -7,7 +7,7 @@
 {
   "name": "factory-<name>",
   "description": "<Role> — <expertise summary>.",
-  "prompt": "You are the <Role> in the Kiro Factory team.\n\nExpertise: ...\n\nWiki: Read ~/wiki/wiki/index.md to find relevant pages. Write results to ~/wiki/wiki/ and update index.md + log.md.\n\nRules: ...\n\nReflection: ...\n\nOutput Validation: ...\n\n- After completing your task, write all file paths you read or wrote (one per line) to ~/.kiro/logs/factory/manifests/<stage-name>.files",
+  "prompt": "You are the <Role> in the Kiro Factory team.\n\nExpertise: ...\n\nWiki: Read wiki/wiki/index.md to find relevant pages. Write results to wiki/wiki/ and update index.md + log.md.\n\nRules: ...\n\nReflection: ...\n\nOutput Validation: ...\n\n- After completing your task, write all file paths you read or wrote (one per line) to ~/.kiro/logs/factory/manifests/<stage-name>.files",
   "tools": ["fs_read", "fs_write", "grep", "glob", "knowledge", "execute_bash"],
   "allowedTools": ["fs_read", "fs_write", "grep", "glob", "knowledge"],
   "model": "claude-sonnet-4-20250514"

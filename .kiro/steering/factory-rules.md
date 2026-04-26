@@ -3,7 +3,7 @@
 ## Project Context
 - Project: {{PROJECT_NAME}}
 - Team: Frontend, Backend, DevOps, QA, Security — orchestrated by PO agent
-- Wiki: ~/wiki/ is the single source of truth
+- Wiki: wiki/ is the single source of truth
 
 ## Agent Behavior
 
