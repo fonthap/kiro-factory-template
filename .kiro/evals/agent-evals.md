@@ -45,3 +45,14 @@ Rate this QA agent output (1-5 each):
 5. RISKS: Uncovered areas identified?
 Reply ONLY as: QA_SCORE=X/25
 ```
+
+## factory-security
+```
+Rate this Security agent output (1-5 each):
+1. THREAT_MODEL: Threat model or attack surface analysis included?
+2. FINDINGS: Findings table with severity (Critical/High/Medium/Low)?
+3. REMEDIATION: Actionable code fixes for each finding?
+4. OWASP: Relevant OWASP Top 10 categories addressed?
+5. VERIFICATION: Steps to verify fixes are effective?
+Reply ONLY as: SEC_SCORE=X/25
+```

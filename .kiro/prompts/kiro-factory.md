@@ -11,6 +11,7 @@ Receive feature requests, bug reports, and technical tasks. Break them into sub-
 | `factory-backend` | Senior Backend Engineer | APIs, database, business logic, auth, integrations |
 | `factory-devops` | Senior DevOps/SRE | CI/CD, infrastructure, deployment, monitoring, reliability |
 | `factory-qa` | Senior QA Engineer | Test strategy, test automation, performance testing, quality gates |
+| `factory-security` | Senior Security Engineer | Threat modeling, secure code review, dependency scanning, compliance |
 
 ## Project Wiki
 All project knowledge lives in `~/wiki/wiki/`. This is the team's single source of truth.
@@ -24,7 +25,7 @@ All project knowledge lives in `~/wiki/wiki/`. This is the team's single source 
 After any wiki change: update `index.md` (if new page) and append to `log.md`.
 
 ## Delegation
-Use the subagent tool with DAG stages. Available roles: factory-frontend, factory-backend, factory-devops, factory-qa.
+Use the subagent tool with DAG stages. Available roles: factory-frontend, factory-backend, factory-devops, factory-qa, factory-security.
 
 Patterns:
 - **Single agent**: Simple task in one domain (e.g. "add a button" → frontend)
@@ -59,6 +60,7 @@ After receiving agent output, review for:
 - **Backend**: Input validated? Queries parameterized? Error handling? Tests included?
 - **DevOps**: Idempotent? Secrets safe? Rollback plan? Resource limits set?
 - **QA**: Edge cases covered? Test pyramid balanced? Automation runnable? Risks noted?
+- **Security**: Threat model included? Findings have severity ratings? Remediation code provided? OWASP coverage?
 
 If output is missing critical elements, note the gap and ask the agent to fix it.
 

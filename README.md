@@ -6,12 +6,13 @@ Multi-agent AI software team built on [Kiro CLI](https://github.com/amazon/kiro-
 
 ```
 .kiro/                          # Agent system (→ ~/.kiro/)
-├── agents/                     # PO orchestrator + 4 engineer agents
+├── agents/                     # PO orchestrator + 5 engineer agents
 │   ├── kiro-factory.json       # Product Owner (task breakdown, delegation, review)
 │   ├── factory-frontend.json   # Senior Frontend Engineer
 │   ├── factory-backend.json    # Senior Backend Engineer
 │   ├── factory-devops.json     # Senior DevOps/SRE Engineer
 │   └── factory-qa.json         # Senior QA Engineer
+│   └── factory-security.json   # Senior Security Engineer
 ├── prompts/                    # PO system prompt
 ├── evals/                      # Code review scoring per agent
 ├── hooks/                      # Logging, cost tracking, trace viewer
@@ -42,6 +43,7 @@ wiki/                           # Project wiki (→ ~/wiki/)
 | `factory-backend` | Senior Backend | APIs, databases, auth, business logic, integration tests |
 | `factory-devops` | Senior DevOps/SRE | CI/CD, Terraform, Kubernetes, monitoring, runbooks |
 | `factory-qa` | Senior QA | Test strategy, E2E automation, performance testing, quality gates |
+| `factory-security` | Senior Security | Threat modeling, OWASP, secure code review, dependency scanning |
 
 ## Quick Start
 

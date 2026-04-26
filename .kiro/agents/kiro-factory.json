@@ -43,7 +43,7 @@
   },
   "toolsSettings": {
     "crew": {
-      "availableAgents": ["factory-frontend", "factory-backend", "factory-devops", "factory-qa"],
+      "availableAgents": ["factory-frontend", "factory-backend", "factory-devops", "factory-qa", "factory-security"],
       "trustedAgents": ["factory-*"]
     }
   },
