@@ -1,0 +1,51 @@
+{
+  "name": "kiro-factory",
+  "description": "Main orchestrator for Kiro Factory AI Team. Analyzes prompts, delegates to specialized sub-agents in parallel via DAG, synthesizes results with logging and memory.",
+  "prompt": "file:///{{HOME}}/.kiro/prompts/kiro-factory.md",
+  "tools": [
+    "fs_read",
+    "fs_write",
+    "execute_bash",
+    "grep",
+    "glob",
+    "subagent",
+    "knowledge",
+    "todo_list"
+  ],
+  "allowedTools": ["fs_read", "grep", "glob", "knowledge", "delegate", "subagent"],
+  "hooks": {
+    "agentSpawn": [
+      {
+        "command": "bash {{HOME}}/.kiro/hooks/factory-log.sh spawn",
+        "timeout_ms": 5000
+      }
+    ],
+    "preToolUse": [
+      {
+        "command": "bash {{HOME}}/.kiro/hooks/factory-log.sh pre-tool",
+        "matcher": "subagent",
+        "timeout_ms": 5000
+      }
+    ],
+    "postToolUse": [
+      {
+        "command": "bash {{HOME}}/.kiro/hooks/factory-log.sh subagent-done",
+        "matcher": "subagent",
+        "timeout_ms": 5000
+      }
+    ],
+    "stop": [
+      {
+        "command": "bash {{HOME}}/.kiro/hooks/factory-log.sh turn-end",
+        "timeout_ms": 5000
+      }
+    ]
+  },
+  "toolsSettings": {
+    "crew": {
+      "availableAgents": ["factory-rnd", "factory-finance", "factory-career", "factory-km-life", "factory-general"],
+      "trustedAgents": ["factory-*"]
+    }
+  },
+  "useLegacyMcpJson": true
+}

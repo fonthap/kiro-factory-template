@@ -1,0 +1,9 @@
+{
+  "chat.defaultModel": "claude-sonnet-4-20250514",
+  "chat.defaultAgent": "kiro-factory",
+  "chat.enableThinking": true,
+  "chat.enableTodoList": true,
+  "chat.enableKnowledge": true,
+  "chat.enableSubagent": true,
+  "chat.enableNotifications": true
+}

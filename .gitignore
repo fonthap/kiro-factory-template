@@ -1,0 +1,21 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Kiro CLI runtime
+.kiro/logs/factory/*.jsonl
+.kiro/logs/factory/*.summary.log
+.kiro/logs/factory/manifests/
+.kiro/logs/factory/traces/
+.kiro/sessions/
+.kiro/.cli_bash_history
+.kiro/.secrets
+.kiro/.git/
+
+# Wiki runtime
+wiki/.obsidian/
+
+# Temp
+*.tmp
+*.swp
+*.bak
