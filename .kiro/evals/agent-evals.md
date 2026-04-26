@@ -1,58 +1,47 @@
 # Kiro Factory — LLM-as-Judge Eval Prompts
-# Used by orchestrator to score sub-agent outputs after each run.
-# Score 1-5 per criterion. Log total score in JSONL.
+# Used by PO orchestrator to score agent outputs after each run.
+# Score 1-5 per criterion.
 
-## factory-rnd
+## factory-frontend
 ```
-Rate this R&D agent output (1-5 each):
-1. COMPARISON: Has comparison table when multiple options exist?
-2. EVIDENCE: Cites reasoning, not just conclusions?
-3. CONFIDENCE: States confidence level (high/medium/low)?
-4. RECOMMENDATIONS: Ends with clear, actionable recommendations?
-5. CONCISENESS: Focused on top 5-7 options, not exhaustive list?
-Reply ONLY as: RND_SCORE=X/25 (sum of 5 criteria)
-```
-
-## factory-finance
-```
-Rate this Finance agent output (1-5 each):
-1. NUMBERS: Uses concrete numbers and THB amounts (not vague)?
-2. TABLES: Presents budgets/breakdowns in table format?
-3. RISKS: Mentions risks alongside every opportunity?
-4. ACTIONS: Has clear action steps with timeline?
-5. ACCURACY: Numbers are consistent and add up correctly?
-Reply ONLY as: FIN_SCORE=X/25 (sum of 5 criteria)
+Rate this Frontend agent output (1-5 each):
+1. TYPES: Proper TypeScript types (no `any`)?
+2. ACCESSIBILITY: Semantic HTML, ARIA, keyboard support considered?
+3. STATES: Error, loading, and empty states handled?
+4. TESTS: At least one test included?
+5. CONVENTIONS: Matches project patterns and style?
+Reply ONLY as: FE_SCORE=X/25
 ```
 
-## factory-career
+## factory-backend
 ```
-Rate this Career agent output (1-5 each):
-1. TIMELINE: Has specific timelines and milestones (not vague)?
-2. ACTIONS: Action items are concrete and achievable?
-3. MARKET: References real market context (Thai tech market)?
-4. SKILLS: Considers both technical and soft skills?
-5. SALARY: Includes salary benchmarks when relevant?
-Reply ONLY as: CAR_SCORE=X/25 (sum of 5 criteria)
-```
-
-## factory-km-life
-```
-Rate this KM/Life agent output (1-5 each):
-1. PRACTICAL: Suggests specific tools, methods, templates?
-2. SYSTEMS: Advice structured as repeatable systems, not one-off tips?
-3. SUSTAINABLE: Realistic for a busy tech professional?
-4. TEMPLATES: Includes ready-to-use templates when helpful?
-5. IMPLEMENTATION: Has clear implementation steps?
-Reply ONLY as: KML_SCORE=X/25 (sum of 5 criteria)
+Rate this Backend agent output (1-5 each):
+1. CONTRACT: API contract/schema defined?
+2. VALIDATION: Input validated at boundaries?
+3. SECURITY: Queries parameterized, secrets safe?
+4. ERRORS: Proper error handling with status codes?
+5. TESTS: At least one test included?
+Reply ONLY as: BE_SCORE=X/25
 ```
 
-## factory-general
+## factory-devops
 ```
-Rate this General/Synthesis agent output (1-5 each):
-1. UNIFIED: Creates unified narrative (not just concatenation)?
-2. CONFLICTS: Identifies conflicts between domain recommendations?
-3. SYNERGIES: Identifies where plans reinforce each other?
-4. PRIORITIES: Top 3-5 actions clearly prioritized?
-5. CONCISE: Adds big picture without repeating domain details?
-Reply ONLY as: GEN_SCORE=X/25 (sum of 5 criteria)
+Rate this DevOps agent output (1-5 each):
+1. IDEMPOTENT: Infrastructure code is idempotent?
+2. SECURITY: Least privilege, secrets managed properly?
+3. MONITORING: Alerts/dashboards included?
+4. ROLLBACK: Rollback strategy documented?
+5. RESOURCES: Limits, health checks, probes configured?
+Reply ONLY as: OPS_SCORE=X/25
+```
+
+## factory-qa
+```
+Rate this QA agent output (1-5 each):
+1. COVERAGE: Happy path + error + edge cases covered?
+2. PYRAMID: Test pyramid balanced (unit > integration > E2E)?
+3. AUTOMATION: Runnable test code included?
+4. STRATEGY: Clear rationale for what to test and why?
+5. RISKS: Uncovered areas identified?
+Reply ONLY as: QA_SCORE=X/25
 ```

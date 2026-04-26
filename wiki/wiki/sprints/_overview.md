@@ -1,17 +1,20 @@
 ---
-title: Projects Overview
-category: projects
+title: Sprints Overview
+category: sprints
 tags: [overview]
 created: {{DATE}}
 updated: {{DATE}}
 ---
 
-# Projects
+# Sprints
 
-## Active
+## Current Sprint
+_No active sprint._
 
-| Project | Status | Owner |
-|---------|--------|-------|
+## History
+
+| Sprint | Goal | Status |
+|--------|------|--------|
 | _None yet_ | | |
 
 ## Pages in This Section

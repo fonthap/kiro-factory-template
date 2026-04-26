@@ -13,35 +13,30 @@ Master catalog of all wiki pages. Agents read this first.
 ## Meta
 | Page | Summary |
 |------|---------|
-| [me.md](me.md) | User profile |
+| [project.md](project.md) | Project overview — tech stack, conventions, environments |
 | [log.md](log.md) | Activity timeline |
 
-## Work
+## Docs
 | Page | Summary |
 |------|---------|
-| [work/_overview.md](work/_overview.md) | Work dashboard |
+| [docs/_overview.md](docs/_overview.md) | Documentation dashboard |
 
-## Learning
+## Architecture
 | Page | Summary |
 |------|---------|
-| [learning/_overview.md](learning/_overview.md) | Learning dashboard |
+| [architecture/_overview.md](architecture/_overview.md) | Architecture decisions and diagrams |
 
-## Career
+## Runbooks
 | Page | Summary |
 |------|---------|
-| [career/_overview.md](career/_overview.md) | Career dashboard |
+| [runbooks/_overview.md](runbooks/_overview.md) | Operational runbooks |
 
-## Finance
+## Sprints
 | Page | Summary |
 |------|---------|
-| [finance/_overview.md](finance/_overview.md) | Finance dashboard |
+| [sprints/_overview.md](sprints/_overview.md) | Sprint tracking |
 
 ## Projects
 | Page | Summary |
 |------|---------|
-| [projects/_overview.md](projects/_overview.md) | Projects dashboard |
-
-## Life
-| Page | Summary |
-|------|---------|
-| [life/_overview.md](life/_overview.md) | Life dashboard |
+| [projects/_overview.md](projects/_overview.md) | Sub-projects and features |

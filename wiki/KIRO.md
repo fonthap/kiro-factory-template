@@ -16,15 +16,14 @@ KIRO.md     → This file (schema)
 
 | Path | Purpose | Naming |
 |------|---------|--------|
-| `wiki/me.md` | User profile | — |
+| `wiki/project.md` | Project overview (tech stack, conventions) | — |
 | `wiki/index.md` | Master index of all pages | — |
 | `wiki/log.md` | All activity timeline | — |
-| `wiki/work/` | Day job: incidents, runbooks, ADRs, postmortems | `INC-`, `RB-`, `ADR-`, `PM-` |
-| `wiki/learning/` | Certs, topics, study notes | `CERT-`, `TOPIC-`, `NOTE-` |
-| `wiki/career/` | Career plans, skills, market | — |
-| `wiki/finance/` | Budget, goals, monthly tracking | `YYYY-MM.md` |
-| `wiki/projects/` | Side projects | `PRJ-name/` |
-| `wiki/life/` | Health, habits, goals | — |
+| `wiki/docs/` | ADRs, API docs, guides | `ADR-NNN-title` |
+| `wiki/architecture/` | System diagrams, service maps | — |
+| `wiki/runbooks/` | Operational runbooks | `RB-service-name` |
+| `wiki/sprints/` | Sprint tracking | `YYYY-WNN` |
+| `wiki/projects/` | Sub-projects, features | — |
 
 Each section has `_overview.md` — a dashboard for that section.
 
@@ -35,7 +34,7 @@ Every wiki page must have YAML frontmatter:
 ```yaml
 ---
 title: "Page Title"
-category: work|learning|career|finance|projects|life|meta
+category: docs|architecture|runbooks|sprints|projects|meta
 tags: [tag1, tag2]
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
@@ -69,13 +68,6 @@ Use `[[page-name]]` for internal wiki links.
 4. Update `wiki/index.md` if new page
 5. Append to `wiki/log.md`
 
-### Lint (health check)
-1. Check for orphan pages (not in index)
-2. Check for broken `[[links]]`
-3. Check for missing frontmatter
-4. Check for stale pages (not updated in 30+ days)
-5. Suggest new pages for mentioned-but-missing concepts
-
 ## Log Format
 
 `wiki/log.md` — single timeline, reverse-chronological:
@@ -83,28 +75,18 @@ Use `[[page-name]]` for internal wiki links.
 ```markdown
 ## [YYYY-MM-DD] type | Title
 - What changed
-- Decision made (if any)
 ```
 
-Types: `ingest`, `query`, `decision`, `update`, `lint`, `setup`, `restructure`
+Types: `feature`, `bugfix`, `refactor`, `infra`, `test`, `docs`, `spike`, `setup`
 
 ## Rules
 
 - Always read `wiki/index.md` first to find relevant pages
-- Read `wiki/me.md` when you need user context
+- Read `wiki/project.md` for tech stack and conventions
 - Read `wiki/<section>/_overview.md` for section context
 - Never modify files in `raw/` — read only
 - Always update `wiki/log.md` after any wiki change
 - Always update `wiki/index.md` when creating new pages
 - Use templates from `templates/` when creating new pages
-  - `page.md` — generic page (default)
-  - `project.md` — project documentation
-  - `research.md` — research with comparison table + recommendations
-  - `overview.md` — section dashboard (`_overview.md`)
-  - `cert.md` — certification study plan
-  - `runbook.md` — operational runbook
-  - `incident.md` — incident report with timeline
-  - `monthly-finance.md` — monthly income/expense tracking
 - Keep pages concise — prefer tables over prose
-- Use THB for currency
 - English only

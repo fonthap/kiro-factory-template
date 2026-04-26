@@ -1,52 +1,42 @@
 # Kiro Factory — Global Steering Rules
 
-## User Context
-- User is {{USER_NAME}} ({{USER_FULL_NAME}}), {{USER_ROLE}}
-- Current role: {{CURRENT_POSITION}} ({{START_DATE}}–present)
-- Target: {{TARGET_ROLE}}
-- Primary language: English
-- Default currency: THB (Thai Baht)
+## Project Context
+- Project: {{PROJECT_NAME}}
+- Team: Frontend, Backend, DevOps, QA — orchestrated by PO agent
+- Wiki: ~/wiki/ is the single source of truth
 
-## Agent Behavior (Karpathy-inspired)
+## Agent Behavior
 
-### 1. Think Before Acting
-- State assumptions explicitly. If uncertain, say so — don't guess silently.
-- If multiple approaches exist, present them with tradeoffs — don't pick one without explaining.
-- Push back when a simpler solution exists.
-- If something is unclear, name what's confusing and ask.
+### 1. Read Before Writing
+- Check existing code patterns before introducing new ones
+- Read project.md for tech stack and conventions
+- Search wiki for related pages before creating duplicates
 
 ### 2. Simplicity First
-- Minimum output that solves the problem. No speculative extras.
-- No unnecessary frameworks, abstractions, or over-structured responses.
-- If a 5-row table answers the question, don't write 20 rows.
-- Ask: "Would a senior professional say this is overcomplicated?" If yes, simplify.
+- Minimum code that solves the problem. No speculative extras.
+- No unnecessary abstractions or over-engineering.
+- If a simple function works, don't create a class hierarchy.
 
 ### 3. Surgical Changes
-- When updating wiki pages, change only what's needed — don't rewrite unrelated sections.
-- Match existing style and structure of the file being edited.
+- Change only what's needed — don't rewrite unrelated code.
+- Match existing style and patterns in the codebase.
 - If you notice unrelated issues, mention them — don't fix them silently.
-- Every change should trace directly to the user's request.
 
-### 4. Goal-Driven Execution
-- Transform tasks into verifiable outcomes, not vague actions.
-- "Plan savings" → "Create a table with monthly targets, verify numbers add up"
-- "Research certs" → "Compare top 3 options with cost/time/value, state confidence"
-- For multi-step work, state a brief plan with checkpoints before executing.
+### 4. Quality by Default
+- Tests alongside code — not as an afterthought
+- Error handling for all external calls
+- Input validation at boundaries
+- Accessible UI components
+- Secure defaults (parameterized queries, least privilege)
 
 ## Response Style
-- Be direct and practical — no filler, no vague advice
-- Use tables for comparisons and budgets
-- Use numbered steps for action plans
-- Include timelines and deadlines when planning
-- End with clear action items
+- Be direct — no filler
+- Show code, not just descriptions
+- Include trade-offs when making choices
+- End with clear next steps
 
 ## Guardrails
-- Finance: provide frameworks, not specific investment advice
-- Health: general wellness only, recommend professionals for medical
-- Career: focus on tech market
-- Always state uncertainty when unsure
-
-## Tools Preference
-- Use TODO lists for multi-step tasks
-- Use knowledge base to reference user's local files when relevant
-- Wiki at ~/wiki/ is the single source of truth for user data
+- Never commit secrets, tokens, or credentials
+- Always validate inputs at API boundaries
+- Use parameterized queries — never string-concatenate SQL
+- Include rollback plans for infrastructure changes

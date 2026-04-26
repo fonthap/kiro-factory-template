@@ -1,17 +1,17 @@
 ---
-title: Projects Overview
-category: projects
+title: Runbooks Overview
+category: runbooks
 tags: [overview]
 created: {{DATE}}
 updated: {{DATE}}
 ---
 
-# Projects
+# Runbooks
 
-## Active
+## Active Runbooks
 
-| Project | Status | Owner |
-|---------|--------|-------|
+| Runbook | Service | Last Updated |
+|---------|---------|-------------|
 | _None yet_ | | |
 
 ## Pages in This Section

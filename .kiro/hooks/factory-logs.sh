@@ -31,10 +31,10 @@ case "$DATE" in
     echo "Turns:        $(grep -c '"event":"turn-end"' "$FILE")"
     ;;
   clean)
-    /Users/cue/.kiro/hooks/factory-cleanup.sh "${2:---dry-run}"
+    "$HOME/.kiro/hooks/factory-cleanup.sh" "${2:---dry-run}"
     ;;
   archive)
-    /Users/cue/.kiro/hooks/factory-archive.sh "${2:---dry-run}"
+    "$HOME/.kiro/hooks/factory-archive.sh" "${2:---dry-run}"
     ;;
   *)
     echo "=== Summary ($DATE) ==="

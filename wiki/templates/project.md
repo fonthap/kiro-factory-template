@@ -5,7 +5,7 @@ tags: [project-tag]
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 status: active | paused | completed
-repo: https://github.com/fonthap/REPO_NAME
+repo: https://github.com/{{GITHUB_USER}}/REPO_NAME
 ---
 
 # PROJECT_NAME

@@ -1,6 +1,6 @@
 {
   "name": "kiro-factory",
-  "description": "Main orchestrator for Kiro Factory AI Team. Analyzes prompts, delegates to specialized sub-agents in parallel via DAG, synthesizes results with logging and memory.",
+  "description": "Product Owner orchestrator — breaks down tasks, delegates to Frontend, Backend, DevOps, and QA agents, synthesizes results, and maintains project wiki.",
   "prompt": "file:///{{HOME}}/.kiro/prompts/kiro-factory.md",
   "tools": [
     "fs_read",
@@ -16,34 +16,34 @@
   "hooks": {
     "agentSpawn": [
       {
-        "command": "bash {{HOME}}/.kiro/hooks/factory-log.sh spawn",
+        "command": "bash $HOME/.kiro/hooks/factory-log.sh spawn",
         "timeout_ms": 5000
       }
     ],
     "preToolUse": [
       {
-        "command": "bash {{HOME}}/.kiro/hooks/factory-log.sh pre-tool",
+        "command": "bash $HOME/.kiro/hooks/factory-log.sh pre-tool",
         "matcher": "subagent",
         "timeout_ms": 5000
       }
     ],
     "postToolUse": [
       {
-        "command": "bash {{HOME}}/.kiro/hooks/factory-log.sh subagent-done",
+        "command": "bash $HOME/.kiro/hooks/factory-log.sh subagent-done",
         "matcher": "subagent",
         "timeout_ms": 5000
       }
     ],
     "stop": [
       {
-        "command": "bash {{HOME}}/.kiro/hooks/factory-log.sh turn-end",
+        "command": "bash $HOME/.kiro/hooks/factory-log.sh turn-end",
         "timeout_ms": 5000
       }
     ]
   },
   "toolsSettings": {
     "crew": {
-      "availableAgents": ["factory-rnd", "factory-finance", "factory-career", "factory-km-life", "factory-general"],
+      "availableAgents": ["factory-frontend", "factory-backend", "factory-devops", "factory-qa"],
       "trustedAgents": ["factory-*"]
     }
   },
