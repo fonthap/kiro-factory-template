@@ -12,7 +12,7 @@
     "knowledge",
     "todo_list"
   ],
-  "allowedTools": ["fs_read", "grep", "glob", "knowledge", "delegate", "subagent"],
+  "allowedTools": ["fs_read", "fs_write", "grep", "glob", "knowledge", "subagent", "todo_list"],
   "hooks": {
     "agentSpawn": [
       {
