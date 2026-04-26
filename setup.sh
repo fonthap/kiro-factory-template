@@ -5,6 +5,15 @@ set -e
 echo "🏭 Kiro Factory Template Setup"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
+if [ -d "$HOME/.kiro/agents" ] && [ -f "$HOME/wiki/wiki/index.md" ]; then
+  echo "⚠️  WARNING: ~/.kiro/ and ~/wiki/ already exist."
+  echo "   Running setup will OVERWRITE your current agent configs and wiki."
+  echo "   If you have an existing Kiro Factory, this is probably not what you want."
+  echo ""
+  read -p "Continue anyway? (yes/no): " DANGER
+  [ "$DANGER" != "yes" ] && echo "Aborted. Your setup is safe." && exit 0
+  echo ""
+fi
 
 read -p "Project name: " PROJECT_NAME
 read -p "GitHub username (for template URLs): " GITHUB_USER
