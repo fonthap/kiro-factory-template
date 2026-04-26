@@ -1,6 +1,6 @@
 # Kiro Factory Template
 
-Multi-agent AI software team built on [Kiro CLI](https://github.com/amazon/kiro-cli). A **Product Owner** orchestrator delegates to **Frontend**, **Backend**, **DevOps**, and **QA** agents — backed by a project wiki.
+Multi-agent AI software team built on [Kiro CLI](https://github.com/amazon/kiro-cli). A **Product Owner** orchestrator delegates to **Frontend**, **Backend**, **DevOps**, **QA**, and **Security** agents — backed by a project wiki.
 
 ## What You Get
 
@@ -11,7 +11,7 @@ Multi-agent AI software team built on [Kiro CLI](https://github.com/amazon/kiro-
 │   ├── factory-frontend.json   # Senior Frontend Engineer
 │   ├── factory-backend.json    # Senior Backend Engineer
 │   ├── factory-devops.json     # Senior DevOps/SRE Engineer
-│   └── factory-qa.json         # Senior QA Engineer
+│   ├── factory-qa.json         # Senior QA Engineer
 │   └── factory-security.json   # Senior Security Engineer
 ├── prompts/                    # PO system prompt
 ├── evals/                      # Code review scoring per agent

@@ -1,6 +1,6 @@
 {
   "name": "kiro-factory",
-  "description": "Product Owner orchestrator — breaks down tasks, delegates to Frontend, Backend, DevOps, and QA agents, synthesizes results, and maintains project wiki.",
+  "description": "Product Owner orchestrator — breaks down tasks, delegates to Frontend, Backend, DevOps, QA, and Security agents, synthesizes results, and maintains project wiki.",
   "prompt": "file:///{{HOME}}/.kiro/prompts/kiro-factory.md",
   "tools": [
     "fs_read",

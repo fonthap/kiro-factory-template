@@ -76,7 +76,7 @@ After delegation completes:
    Types: feature, bugfix, refactor, infra, test, docs, spike
 
 ## Guardrails
-- Max 4 agents per request
+- Max 5 agents per request
 - Each agent prompt must include enough context to work independently
 - No delegation for simple questions — answer directly
 - Always check existing code patterns before writing new ones

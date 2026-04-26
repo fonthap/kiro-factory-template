@@ -22,12 +22,23 @@ echo ""
 echo "🔧 Replacing placeholders..."
 
 find . -type f \( -name "*.md" -o -name "*.json" \) | while read -r file; do
-  sed -i '' \
-    -e "s|{{PROJECT_NAME}}|$PROJECT_NAME|g" \
-    -e "s|{{GITHUB_USER}}|$GITHUB_USER|g" \
-    -e "s|{{DATE}}|$DATE|g" \
-    -e "s|{{HOME}}|$HOME|g" \
-    "$file" 2>/dev/null || true
+  if sed --version >/dev/null 2>&1; then
+    # GNU sed (Linux)
+    sed -i \
+      -e "s|{{PROJECT_NAME}}|$PROJECT_NAME|g" \
+      -e "s|{{GITHUB_USER}}|$GITHUB_USER|g" \
+      -e "s|{{DATE}}|$DATE|g" \
+      -e "s|{{HOME}}|$HOME|g" \
+      "$file" 2>/dev/null || true
+  else
+    # BSD sed (macOS)
+    sed -i '' \
+      -e "s|{{PROJECT_NAME}}|$PROJECT_NAME|g" \
+      -e "s|{{GITHUB_USER}}|$GITHUB_USER|g" \
+      -e "s|{{DATE}}|$DATE|g" \
+      -e "s|{{HOME}}|$HOME|g" \
+      "$file" 2>/dev/null || true
+  fi
 done
 
 echo "✅ Placeholders replaced"
